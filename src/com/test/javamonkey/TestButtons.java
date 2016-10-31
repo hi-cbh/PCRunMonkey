@@ -52,13 +52,13 @@ public final class TestButtons {
         jButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 label.setText("You clicked jButton");
-                System.out.println("run");
-                try {
-        			CommandUtil.execCommand2("adb shell monkey -v -p com.sec.android.app.popupcalculator 100");
-        		} catch (IOException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
+//                System.out.println("run");
+//                try {
+//        			//CommandUtil.execCommand2("adb shell monkey -v -p com.sec.android.app.popupcalculator 100");
+//        		} catch (IOException e) {
+//        			// TODO Auto-generated catch block
+//        			e.printStackTrace();
+//        		}
             }
         });
 

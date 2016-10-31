@@ -18,7 +18,7 @@ import java.util.Locale;
 public class CommandUtil {
 
 	public static final String TAG = CommandUtil.class.getSimpleName();
-	public static final String COMMAND_SH = "sh";
+	public static final String COMMAND_SH = "";
 	public static final String COMMAND_LINE_END = "\n";
 	public static final String COMMAND_EXIT = "exit\n";
 
@@ -113,6 +113,7 @@ public class CommandUtil {
 	}
 
 	
+	
 	public static void execCommand2(String command) throws IOException {
 		Runtime runtime = Runtime.getRuntime();
 		Process proc = runtime.exec(command);
@@ -140,6 +141,6 @@ public class CommandUtil {
 		}
 	}
 
-
+	
 
 }

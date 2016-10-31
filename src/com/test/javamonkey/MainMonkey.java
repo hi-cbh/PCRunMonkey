@@ -37,6 +37,10 @@ public class MainMonkey extends JFrame implements ActionListener{
 	Box slider = new Box(BoxLayout.Y_AXIS);
 	
 	Font f16 = new Font("",Font.BOLD,16);
+	public static String cmdline = "adb shell monkey ";
+	public static String logStr = "";
+	
+	public String[] list = {" "};
 	
 	
 	public static void main(String[] args) {
@@ -76,12 +80,45 @@ public class MainMonkey extends JFrame implements ActionListener{
 		bg.add(logjrb3);
 		logjrb3.setSelected(true);
 		
+		//添加侦听
+
+        // 生成一个新的动作监听器对象，备用
+        ActionListener al = new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                JRadioButton radio = (JRadioButton) ae.getSource();
+                String logtmp = "";
+                if (radio == logjrb1) {
+                	logtmp = " -v ";
+                	
+                    System.out.println("You selected Radio 1");
+                } else if (radio == logjrb2) {
+                	logtmp = " -v -v ";
+                	System.out.println("You selected Radio 2");
+                } else {
+                	logtmp = " -v -v -v ";
+                	System.out.println("You selected Radio 3");
+                }
+                logStr = logtmp;
+            }
+        };
+		
+        logjrb1.addActionListener(al);
+        logjrb2.addActionListener(al);
+        logjrb3.addActionListener(al);
+        
+		
+		
+		
 		jp1.add(logjl);
 		jp1.add(logjrb1);
 		jp1.add(logjrb2);
 		jp1.add(logjrb3);
 		jp1.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.add(jp1);
+		
+		
+		
+		
 		
 		//运行的包名
 		//运行包名
@@ -93,6 +130,27 @@ public class MainMonkey extends JFrame implements ActionListener{
 		jp2.add(add);
 		jp2.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.add(jp2);
+		
+		add.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CommandUtil.execute("adb shell pm list package -3 -i com");
+				
+			}
+		});
+		
+		jcb.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
+		
+		
 		
 		
 		//运行种子 seed
@@ -218,6 +276,18 @@ public class MainMonkey extends JFrame implements ActionListener{
 		this.add(jb6);
 		this.add(jb7);
 		
+		jb5.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(cmdline + logStr);
+				
+			}
+			
+		});
+		
+		
+		
 		
 		//设置布局
 		this.setLayout(null );
@@ -260,6 +330,9 @@ public class MainMonkey extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		
+		
 		
 		if(e.getActionCommand()==" Run ")
 		{

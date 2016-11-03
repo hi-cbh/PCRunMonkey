@@ -11,8 +11,7 @@ import java.util.Scanner;
 
 /***
  * 执行命令行工具类
- * 
- * @author yangxiaolong 2014-04-30
+ *
  * 
  */
 public class CommandUtil {
@@ -182,6 +181,22 @@ public class CommandUtil {
 		return commandStream;
 	}
 
+	/**
+	 * 我们在调用Process的waitFor()时经常会遇到明明Process已经结束了，
+	 * 但是waitFor()还是阻塞在那里，那是因为Process的inputStream缓存造成的，
+	 * 我们现在另外再起一个线程，来监控我们的Process，实时清空缓存就可以解决这个问题了
+	 * 
+	 * 然后在waitFor之前插入
+	 * WatchThread wt = new WatchThread(p2);  
+	 * wt.start();  
+	 * 
+	 * 在waitFor之后插入
+	 * ArrayList<String> commandStream = wt.getStream();  
+	 * t.setOver(true);  
+	 * 
+	 * @author Administrator
+	 *
+	 */
 	public static class WatchThread extends Thread {
 		Process p;
 		boolean over;

@@ -69,6 +69,12 @@ public class MainMonkey extends JFrame implements ActionListener {
 	private static int d = 0;
 	private static int f = 0;
 	private static int g = 0;
+	private static int abc1 = 0;
+	private static int abc2 = 0;
+	private static int abc3 = 0;
+	private static int abc4 = 0;
+	private static int abc5 = 0;
+	private static int abc6 = 0;
 	
 	List<String> stream = null;
 	List<String> bllist = null;
@@ -81,6 +87,8 @@ public class MainMonkey extends JFrame implements ActionListener {
 	MonkeyThread sm = new MonkeyThread();
 	MyActionListener listener = new MyActionListener();
 	AddActionListener addlistener = new AddActionListener();
+	MyChageListener mcl = new MyChageListener();
+	
 	
 	static String[] debugStrList = { "--ignore-crashes", "--ignore-timeouts",
 			"--ignore-security-exceptions", "--kill-process-after-error",
@@ -269,6 +277,7 @@ public class MainMonkey extends JFrame implements ActionListener {
 		jp5.setLayout(new GridLayout(3, 2));
 		this.add(jp5);
 
+		
 		jcb3.addItemListener(new MyItemListener());
 		jcb4.addItemListener(new MyItemListener());
 		jcb5.addItemListener(new MyItemListener());
@@ -301,20 +310,22 @@ public class MainMonkey extends JFrame implements ActionListener {
 		jp9.add(Box.createVerticalStrut(x));
 		jp9.add(js6);
 		jp9.setLayout(new BoxLayout(jp9, BoxLayout.X_AXIS));
-
-		js1.setValue(80);
-		js2.setValue(20);
-		js3.setValue(0);
+		
+		
+		
+		js1.setValue(20);
+		js2.setValue(30);
+		js3.setValue(30);
 		js4.setValue(0);
 		js5.setValue(0);
 		js6.setValue(0);
 
-		js1.addChangeListener(new MyChageListener());
-		js2.addChangeListener(new MyChageListener());
-		js3.addChangeListener(new MyChageListener());
-		js4.addChangeListener(new MyChageListener());
-		js5.addChangeListener(new MyChageListener());
-		js6.addChangeListener(new MyChageListener());
+		js1.addChangeListener(mcl);
+		js2.addChangeListener(mcl);
+		js3.addChangeListener(mcl);
+		js4.addChangeListener(mcl);
+		js5.addChangeListener(mcl);
+		js6.addChangeListener(mcl);
 
 		jl6 = new JLabel("touch");
 		jl7 = new JLabel("motion");
@@ -494,7 +505,7 @@ public class MainMonkey extends JFrame implements ActionListener {
 		// 设置窗体大小
 		this.setSize(400, 600);
 		// 设置窗体初始位置
-		this.setLocation(100, 50);
+		this.setLocation(800, 50);
 		// 设置当关闭窗口时，保证JVM也退出
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 显示窗体
@@ -581,21 +592,6 @@ public class MainMonkey extends JFrame implements ActionListener {
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			JSlider js0 = (JSlider) e.getSource();
-			if (js0 == js1) {
-				System.out.println("value: "+ js0.getValue());
-
-			} else if (js0 == js2) {
-				System.out.println("value: "+ js0.getValue());
-			} else if (js0 == js3) {
-				System.out.println("value: "+ js0.getValue());
-			} else if (js0 == js4) {
-				System.out.println("value: "+ js0.getValue());
-			} else if (js0 == js5) {
-				System.out.println("value: "+ js0.getValue());
-			} else if (js0 == js6) {
-				System.out.println("value: "+ js0.getValue());
-			}
-			
 			a = js1.getValue();
 			b = js2.getValue();
 			c = js3.getValue();
@@ -603,12 +599,347 @@ public class MainMonkey extends JFrame implements ActionListener {
 			f = js5.getValue();
 			g = js6.getValue();
 			
+			int [] il = new int [6];
+			
+			if (js0 == js1) {
+				js2.removeChangeListener(mcl);
+				js3.removeChangeListener(mcl);
+				js4.removeChangeListener(mcl);
+				js5.removeChangeListener(mcl);
+				js6.removeChangeListener(mcl);
+				il[0] = a;
+				il[1] = b;
+				il[2] = c;
+				il[3] = d;
+				il[4] = f;
+				il[5] = g;
+				
+				if(!addState(abc1, a)){
+					return;
+				}
+				changeState(il);
+				
+				js1.setValue(il[0]);
+				js2.setValue(il[1]);
+				js3.setValue(il[2]);
+				js4.setValue(il[3]);
+				js5.setValue(il[4]);
+				js6.setValue(il[5]);
+
+				js2.addChangeListener(mcl);
+				js3.addChangeListener(mcl);
+				js4.addChangeListener(mcl);
+				js5.addChangeListener(mcl);
+				js6.addChangeListener(mcl);
+				
+				abc1 = 0;
+				abc2 = 0;
+				abc3 = 0;
+				abc4 = 0;
+				abc5 = 0;
+				abc6 = 0;
+				
+			} else if (js0 == js2) {
+
+				js1.removeChangeListener(mcl);
+				js3.removeChangeListener(mcl);
+				js4.removeChangeListener(mcl);
+				js5.removeChangeListener(mcl);
+				js6.removeChangeListener(mcl);
+				il[1] = a;
+				il[0] = b;
+				il[2] = c;
+				il[3] = d;
+				il[4] = f;
+				il[5] = g;
+				
+				if(!addState(abc2, b)){
+					return;
+				}
+				changeState(il);
+
+				js1.setValue(il[1]);
+				js2.setValue(il[0]);
+				js3.setValue(il[2]);
+				js4.setValue(il[3]);
+				js5.setValue(il[4]);
+				js6.setValue(il[5]);
+				
+				js1.addChangeListener(mcl);
+				js3.addChangeListener(mcl);
+				js4.addChangeListener(mcl);
+				js5.addChangeListener(mcl);
+				js6.addChangeListener(mcl);
+				abc1 = 0;
+				abc2 = 0;
+				abc3 = 0;
+				abc4 = 0;
+				abc5 = 0;
+				abc6 = 0;
+			} else if (js0 == js3) {
+
+				js1.removeChangeListener(mcl);
+				js2.removeChangeListener(mcl);
+				js4.removeChangeListener(mcl);
+				js5.removeChangeListener(mcl);
+				js6.removeChangeListener(mcl);
+				il[2] = a;
+				il[1] = b;
+				il[0] = c;
+				il[3] = d;
+				il[4] = f;
+				il[5] = g;
+				
+				if(!addState(abc3, c)){
+					return;
+				}
+				changeState(il);
+
+				js1.setValue(il[2]);
+				js2.setValue(il[1]);
+				js3.setValue(il[0]);
+				js4.setValue(il[3]);
+				js5.setValue(il[4]);
+				js6.setValue(il[5]);
+				
+				js1.addChangeListener(mcl);
+				js2.addChangeListener(mcl);
+				js4.addChangeListener(mcl);
+				js5.addChangeListener(mcl);
+				js6.addChangeListener(mcl);
+				abc1 = 0;
+				abc2 = 0;
+				abc3 = 0;
+				abc4 = 0;
+				abc5 = 0;
+				abc6 = 0;
+			} else if (js0 == js4) {
+
+				js1.removeChangeListener(mcl);
+				js2.removeChangeListener(mcl);
+				js3.removeChangeListener(mcl);
+				js5.removeChangeListener(mcl);
+				js6.removeChangeListener(mcl);
+				il[3] = a;
+				il[1] = b;
+				il[2] = c;
+				il[0] = d;
+				il[4] = f;
+				il[5] = g;
+				
+				if(!addState(abc4, d)){
+					return;
+				}
+				changeState(il);
+
+				js1.setValue(il[3]);
+				js2.setValue(il[1]);
+				js3.setValue(il[2]);
+				js4.setValue(il[0]);
+				js5.setValue(il[4]);
+				js6.setValue(il[5]);
+				
+				js1.addChangeListener(mcl);
+				js2.addChangeListener(mcl);
+				js3.addChangeListener(mcl);
+				js5.addChangeListener(mcl);
+				js6.addChangeListener(mcl);
+				abc1 = 0;
+				abc2 = 0;
+				abc3 = 0;
+				abc4 = 0;
+				abc5 = 0;
+				abc6 = 0;
+				
+			} else if (js0 == js5) {
+
+				js1.removeChangeListener(mcl);
+				js2.removeChangeListener(mcl);
+				js3.removeChangeListener(mcl);
+				js4.removeChangeListener(mcl);
+				js6.removeChangeListener(mcl);
+				il[4] = a;
+				il[1] = b;
+				il[2] = c;
+				il[3] = d;
+				il[0] = f;
+				il[5] = g;
+				
+				if(!addState(abc5, f)){
+					return;
+				}
+				changeState(il);
+
+				js1.setValue(il[4]);
+				js2.setValue(il[1]);
+				js3.setValue(il[2]);
+				js4.setValue(il[3]);
+				js5.setValue(il[0]);
+				js6.setValue(il[5]);
+				
+				js1.addChangeListener(mcl);
+				js2.addChangeListener(mcl);
+				js3.addChangeListener(mcl);
+				js4.addChangeListener(mcl);
+				js6.addChangeListener(mcl);
+				abc1 = 0;
+				abc2 = 0;
+				abc3 = 0;
+				abc4 = 0;
+				abc5 = 0;
+				abc6 = 0;
+			} else if (js0 == js6) {
+
+				js1.removeChangeListener(mcl);
+				js2.removeChangeListener(mcl);
+				js3.removeChangeListener(mcl);
+				js4.removeChangeListener(mcl);
+				js5.removeChangeListener(mcl);
+				il[5] = a;
+				il[1] = b;
+				il[2] = c;
+				il[3] = d;
+				il[4] = f;
+				il[0] = g;
+				
+				if(!addState(abc6, g)){
+					return;
+				}
+				changeState(il);
+
+				js1.setValue(il[5]);
+				js2.setValue(il[1]);
+				js3.setValue(il[2]);
+				js4.setValue(il[3]);
+				js5.setValue(il[4]);
+				js6.setValue(il[0]);
+				
+				js1.addChangeListener(mcl);
+				js2.addChangeListener(mcl);
+				js3.addChangeListener(mcl);
+				js4.addChangeListener(mcl);
+				js5.addChangeListener(mcl);
+				
+				abc1 = 0;
+				abc2 = 0;
+				abc3 = 0;
+				abc4 = 0;
+				abc5 = 0;
+				abc6 = 0;
+			}
 			
 			
+
 		}
 
 	}
 
+	public boolean addState(int num1, int num2){
+		//增量的时候运行，非增量的时候不运行
+		if(num1 == 0 ){
+			num1 = num2;
+		}else if(num1 > num2){
+			//System.out.println("减法---------");
+			return false;
+		}else{
+			num1 = num2;
+		}
+		
+		return true;
+	}
+	
+	
+	
+	public void changeState(int il[]){
+		int n = 0; //为0的个数
+		int counti = 0;
+		int last = 0; //剩余
+		
+		for(int i=0;i < 6; i++){
+			if(il[i] ==0){
+				n++;
+				continue;
+			}
+			counti = counti + il[i];
+		}
+		
+		//System.out.println("counti: " + counti);
+		//System.out.println("当前为0个数：" + n);
+		//总数超过100
+		if(counti > 100){
+			
+			int lasti = (counti - 100)%(5-n);
+			last = (counti - 100)/(5-n);
+			int nn = (5-n);
+			//等于0时
+			if(last == 0){
+				last = lasti;
+				lasti = 0;
+			}
+			
+			//System.out.println("last0: " + last);
+			//System.out.println("lasti0: " + lasti);
+			
+			if(nn == 0)
+			{
+				return;
+			}
+			//平均不足
+			if(last < nn){
+				for(int i0=1; i0<6; i0++){
+					if(il[i0] == 0){
+						continue;
+					}
+					if(il[i0] < last){
+						last = il[i0] - last;
+						il[i0] = 0;
+					}
+					else if(il[i0] > last){
+						il[i0] = il[i0] - last;
+					}
+					
+					if(last == 0){
+						return;
+					}
+				}
+			}
+			
+			//平均数大于1
+			for(int ii =1; ii< 6; ii++){
+//				System.out.println("last: " + last);
+//				System.out.println("lasti: " + lasti);	
+				if(il[ii] == 0){
+					
+					continue;
+				}
+				if(il[ii] >= last){
+					il[ii] = il[ii] - last;
+					//System.out.println("run: " + il[ii]);
+				}else if(il[ii] < last){
+					lasti = last - il[ii];
+					il[ii] = 0;
+				}
+				
+				if(lasti >= 1){
+//					System.out.println("lastiii: lasti: " + lasti);
+//					System.out.println("lastiii: ii: " + ii);
+//					System.out.println("lastiii: n: " + n);
+//					System.out.println("lastiii: " + ((5 - n) - (5-ii)));
+//					System.out.println("lastiii: " + (ii-n));
+					last = last + lasti/(ii-n);
+					
+				}
+			}
+		}
+//		int cc = 0;
+//		for(int iii: il){
+//			System.out.println("iii: " + iii);
+//			cc = cc + iii;
+//			
+//		}
+		
+
+	}
 
 	
 	

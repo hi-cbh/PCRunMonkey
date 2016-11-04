@@ -62,6 +62,7 @@ public class MainMonkey extends JFrame implements ActionListener {
 	public static String timeline = RUNTIME; // 间隔时间默认0.5秒
 	public static String debugline = "";
 	public static String runline = RUNCNT;
+	public static String evenLine = "";
 
 	private static int a = 80;
 	private static int b = 20;
@@ -94,6 +95,15 @@ public class MainMonkey extends JFrame implements ActionListener {
 			"--ignore-security-exceptions", "--kill-process-after-error",
 			"--randomize-throttle" };
 
+	static String[] eventStrList = {
+		"--pct-touch",
+		"--pct-motion",
+		"--pct-trackball",
+		"--pct-nav",
+		"--pct-appswitch",
+		"--pct-anyevent"
+		};
+	
 	public static void main(String[] args) {
 
 		new MainMonkey();
@@ -350,7 +360,7 @@ public class MainMonkey extends JFrame implements ActionListener {
 		jp6.add(jp9);
 		jp6.add(jp10);
 		this.add(jp6);
-
+		
 		// 快捷方案
 		jl4 = new JLabel("快捷测试方案：");
 		jb1 = new JButton("方案一");
@@ -363,6 +373,114 @@ public class MainMonkey extends JFrame implements ActionListener {
 		jp7.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.add(jp7);
 
+		jb1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				//日志
+				logjrb2.setSelected(true);
+				//seed
+				jcb1.setSelected(true);
+				jtf1.setText("");
+				//间隔时间
+				jcb2.setSelected(false);
+				jtf2.setText("1000");
+				//调试
+				jcb3.setSelected(true);
+				jcb4.setSelected(true);
+				jcb5.setSelected(false);
+				jcb6.setSelected(false);
+				jcb7.setSelected(false);
+
+				//事件百分比
+				js1.setValue(90);
+				js2.setValue(5);
+				js3.setValue(5);
+				js4.setValue(0);
+				js5.setValue(0);
+				js6.setValue(0);
+				
+				//事件
+				jcb11.setSelected(false);
+				jtf3.setText("300000");
+				
+
+			}
+		});
+		
+		
+		jb2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//日志
+				logjrb3.setSelected(true);
+				//seed
+				jcb1.setSelected(false);
+				jtf1.setText("48373");
+				//间隔时间
+				jcb2.setSelected(false);
+				jtf2.setText("2000");
+				//调试
+				jcb3.setSelected(true);
+				jcb4.setSelected(true);
+				jcb5.setSelected(false);
+				jcb6.setSelected(false);
+				jcb7.setSelected(true);
+
+				//事件百分比
+				js1.setValue(60);
+				js2.setValue(20);
+				js3.setValue(20);
+				js4.setValue(0);
+				js5.setValue(0);
+				js6.setValue(0);
+				
+				//事件
+				jcb11.setSelected(false);
+				jtf3.setText("200000");
+				
+			}
+		});
+		
+		jb3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//日志
+				logjrb3.setSelected(true);
+				//seed
+				jcb1.setSelected(false);
+				jtf1.setText("2345346");
+				//间隔时间
+				jcb2.setSelected(false);
+				jtf2.setText("1500");
+				//调试
+				jcb3.setSelected(true);
+				jcb4.setSelected(true);
+				jcb5.setSelected(true);
+				jcb6.setSelected(true);
+				jcb7.setSelected(true);
+
+				//事件百分比
+				js1.setValue(50);
+				js2.setValue(10);
+				js3.setValue(10);
+				js4.setValue(10);
+				js5.setValue(10);
+				js6.setValue(10);
+				
+				//事件
+				jcb11.setSelected(false);
+				jtf3.setText("100000");
+				
+				
+			}
+		});
+		
+		
+		
 		jl5 = new JLabel("事件数量: ");
 		jcb11 = new JCheckBox("默认");
 		jtf3 = new JTextField(16);
@@ -459,8 +577,9 @@ public class MainMonkey extends JFrame implements ActionListener {
 				debugline = getDebugStr();
 				// System.out.println("---------next()-----------");
 				//System.out.println(cmdline + logline + packageline + seedline+ timeline + debugline + runline);
-
-				sm.monkeyRun(cmdline + logline + packageline+ seedline + timeline + debugline + runline);
+				evenLine =  getEventStr();
+				
+				sm.monkeyRun(cmdline + logline + packageline+ seedline + timeline + debugline + runline + evenLine);
 			}
 
 		});
@@ -926,6 +1045,9 @@ public class MainMonkey extends JFrame implements ActionListener {
 //					System.out.println("lastiii: n: " + n);
 //					System.out.println("lastiii: " + ((5 - n) - (5-ii)));
 //					System.out.println("lastiii: " + (ii-n));
+					if(ii-n == 0){
+						continue;
+					}
 					last = last + lasti/(ii-n);
 					
 				}
@@ -998,5 +1120,26 @@ public class MainMonkey extends JFrame implements ActionListener {
 		}
 		System.out.println("tmp: " + tmp);
 		return tmp;
+	}
+	
+	public String getEventStr(){
+		
+		int tmp[] = new int[6];
+		
+		tmp[0] = js1.getValue();
+		tmp[1] = js2.getValue();
+		tmp[2] = js3.getValue();
+		tmp[3] = js4.getValue();
+		tmp[4] = js5.getValue();
+		tmp[5] = js6.getValue();
+		
+		String str = " ";
+		
+		for(int i=0; i<6; i++){
+			str = str + eventStrList[i] + " " + tmp[i] + " ";
+		}
+		
+
+		return str;
 	}
 }

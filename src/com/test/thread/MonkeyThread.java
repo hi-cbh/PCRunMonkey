@@ -98,6 +98,7 @@ public class MonkeyThread {
 			alist = CommandUtil.execCommand(cmdline);
 
 			if(alist == null){
+				System.out.println("·µ»ØÖµÎª null");
 				return;
 			}
 			

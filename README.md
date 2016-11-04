@@ -10,7 +10,7 @@ Monkey 传参工具设计-PC端
 
 	运行： 点击 bat目录下，“双击打开.bat”
 
-
+	日志： 日志保存在运行的目录下，已打开的时间命名。
 
 * `package` 是运行APP的包名，adb环境下运行 `adb shell dumpsys activity | find "mFocusedActivity"` 可活动当前界面App的package。
 	
